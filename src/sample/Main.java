@@ -1,3 +1,6 @@
+//Written by Peter Senyszyn
+//2017
+
 package sample ;
 
 import javafx.application.Application ;
