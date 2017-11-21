@@ -6,10 +6,13 @@ package sample;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class Email
+public class Email implements Comparable<Email>
 {
     //Unfiltered email container
     private ArrayList<String> _rawEmail = new ArrayList<>() ;
@@ -34,6 +37,27 @@ public class Email
     private static MaxentTagger _tagger = new MaxentTagger( "src/sample/english-left3words-distsim.tagger" ) ;
 
     private static SentiWord _sentiWord ;
+
+    @Override
+    public int compareTo( Email e )
+    {
+        DateFormat df = new SimpleDateFormat( "MMM/dd/yyyy" ) ;
+
+        try
+        {
+            Date d1 = df.parse( getFormattedDate() ) ;
+            Date d2 = df.parse( e.getFormattedDate() ) ;
+
+            return d1.compareTo( d2 ) ;
+        }
+
+        catch ( ParseException p )
+        {
+            p.printStackTrace() ;
+        }
+
+        return 0 ;
+    }
 
     public Email( ArrayList<String> rawEmail )
     {
@@ -237,4 +261,19 @@ public class Email
 
         //System.out.println( _avgSentimentScore ) ;
     }
+
+    public Double getAvgSentimentScore()
+    { return _avgSentimentScore ; }
+
+    public String getMonthDate()
+    { return _monthDate ; }
+
+    public String getDayDate()
+    { return _dayDate ; }
+
+    public String getYearDate()
+    { return _yearDate ; }
+
+    public String getFormattedDate()
+    { return _monthDate + "/" + _dayDate + "/" + _yearDate ; }
 }

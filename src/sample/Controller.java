@@ -29,13 +29,9 @@ public class Controller
     @FXML
     protected void onRunSentimentAnalysisPressed() throws IOException
     {
-        _root = FXMLLoader.load( getClass().getResource("run.fxml" ) ) ;
-
         _currentStage = ( Stage )_runSentimentAnalysis.getScene().getWindow() ;
 
-        _currentStage.setScene( new Scene( _root, 1024/2, 768/2 ) ) ;
-        _currentStage.show() ;
-
         Run run = new Run() ;
+        run.displayData( _currentStage ) ;
     }
 }
