@@ -113,6 +113,16 @@ public class SentiWord
 
     public double extract( String word, String position )
     {
-        return _dictionary.get( word + "#" + position ) ;
+        Double sentimentScore = _dictionary.get( word + "#" + position ) ;
+
+        if ( sentimentScore != null )
+        {
+            return sentimentScore ;
+        }
+
+        else
+        {
+            return 0.0 ;
+        }
     }
 }

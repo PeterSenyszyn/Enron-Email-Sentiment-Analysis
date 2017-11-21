@@ -3,8 +3,6 @@
 
 package sample;
 
-import edu.stanford.nlp.tagger.maxent.MaxentTagger;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -14,21 +12,12 @@ import java.util.*;
 
 public class Run
 {
-    private SentiWord _sentiWord ;
     private ArrayList<Email> _emails = new ArrayList<>() ;
+
+    private int counter = 0 ;
 
     public Run()
     {
-        try
-        {
-            _sentiWord = new SentiWord( "src/sample/sentiwordnet.txt" );
-
-            
-        }
-        catch ( IOException e )
-        {
-            e.printStackTrace();
-        }
     }
 
     //Recursively searches through directory to find all associated email files
@@ -44,6 +33,8 @@ public class Run
             {
                 if ( !file.getName().equals( ".DS_Store" ) )
                 {
+                    counter++ ;
+                    System.out.println( counter ) ;
                     files.add(file);
                 }
             }
@@ -73,48 +64,18 @@ public class Run
                 Email email = new Email( new ArrayList<>( lines ) ) ;
 
                 _emails.add( email ) ;
-
-                //i++ ;
-
-                //System.out.println( i ) ;
             }
             catch ( IOException e )
             {
                 e.printStackTrace() ;
             }
-
-            //System.out.println( file.getAbsolutePath() ) ;
         }
-
-        //System.out.println( _emails.size() ) ;
     }
 
     public static void main( String[] args )
     {
         Run run = new Run() ;
 
-        //run.parseEmails( "/Users/petersenyszyn/Downloads/enron-email-dataset" ) ;
-        run.parseEmails( "/Users/petersenyszyn/Downloads/allen-p/poop" ) ;
-
-        /*MaxentTagger tagger = new MaxentTagger( "src/sample/english-bidirectional-distsim.tagger" ) ;
-
-        String sample = "This is sample text 3827." ;
-
-        String tagged = tagger.tagString( sample ) ;
-
-        StringTokenizer st = new StringTokenizer( tagged, " " ) ;
-
-        while ( st.hasMoreTokens() )
-        {
-            String[] splitStr = st.nextToken().split( "_" ) ;
-
-            for ( int i = 0 ; i < splitStr.length ; i++ )
-                System.out.println( splitStr[i] ) ;
-        }*/
-
-        //String[] splitStr = tagged.split( "_" ) ;
-
-        //System.out.println( tagged );
-
+        run.parseEmails( "/Users/petersenyszyn/Downloads/final-enron-email-dataset" ) ;
     }
 }
