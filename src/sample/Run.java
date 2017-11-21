@@ -18,6 +18,7 @@ public class Run
 
     public Run()
     {
+        parseEmails( "src/sample/final-enron-email-dataset");
     }
 
     //Recursively searches through directory to find all associated email files
@@ -52,8 +53,6 @@ public class Run
 
         fetchEmailFiles( path, files ) ;
 
-        int i = 0 ;
-
         for ( File file : files )
         {
             try
@@ -70,12 +69,5 @@ public class Run
                 e.printStackTrace() ;
             }
         }
-    }
-
-    public static void main( String[] args )
-    {
-        Run run = new Run() ;
-
-        run.parseEmails( "/Users/petersenyszyn/Downloads/final-enron-email-dataset" ) ;
     }
 }
