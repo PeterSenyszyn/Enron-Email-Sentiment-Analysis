@@ -22,9 +22,6 @@ public class Controller
     @FXML
     private Button _runSentimentAnalysis ;
 
-    @FXML
-    private Button _onViewAnalysisResults ;
-
     public Controller()
     {
 
@@ -41,16 +38,5 @@ public class Controller
         _currentStage.show() ;
 
         Run run = new Run() ;
-    }
-
-    @FXML
-    protected void onViewAnalysisResultsPressed() throws IOException
-    {
-        _root = FXMLLoader.load( getClass().getResource( "view.fxml" ) ) ;
-
-        _currentStage = ( Stage )_onViewAnalysisResults.getScene().getWindow() ;
-
-        _currentStage.setScene( new Scene ( _root, 1024/2, 768/2 ) ) ;
-        _currentStage.show() ;
     }
 }
