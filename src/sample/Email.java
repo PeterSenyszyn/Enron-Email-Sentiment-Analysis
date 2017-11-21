@@ -156,7 +156,7 @@ public class Email
     private void _calculateSentimentScore()
     {
         //First, we need to trim the raw email buffer to grab ONLY the contents of the subject
-        //and the actual email's contents
+        //and the actual email's contents and date
         _filterEmail() ;
 
         for ( String s : _filteredEmail )
@@ -189,25 +189,25 @@ public class Email
                      */
 
                     //Noun
-                    if ( Stream.of( "NN", "NNS", "NNP", "NNPS", "PRP", "PRP$" ).anyMatch( x -> posStr.equals( x ) ) )
+                    if ( Stream.of( "NN", "NNS", "NNP", "NNPS", "PRP", "PRP$" ).anyMatch( posStr::equals ) )
                     {
                         score = _sentiWord.extract( word, "n" ) ;
                     }
 
                     //Verb
-                    else if ( Stream.of( "VB", "VBD", "VBG", "VBN", "VBP", "VBZ" ).anyMatch( x -> posStr.equals( x ) ) )
+                    else if ( Stream.of( "VB", "VBD", "VBG", "VBN", "VBP", "VBZ" ).anyMatch( posStr::equals ) )
                     {
                         score = _sentiWord.extract( word, "v" ) ;
                     }
 
                     //Adjective
-                    else if ( Stream.of( "JJ", "JJR", "JJS" ).anyMatch( x -> posStr.equals( x ) ) )
+                    else if ( Stream.of( "JJ", "JJR", "JJS" ).anyMatch( posStr::equals ) )
                     {
                         score = _sentiWord.extract( word, "a" ) ;
                     }
 
                     //Adverb
-                    else if ( Stream.of( "RB", "RBR", "RBS" ).anyMatch( x -> posStr.equals( x ) ) )
+                    else if ( Stream.of( "RB", "RBR", "RBS" ).anyMatch( posStr::equals ) )
                     {
                         score = _sentiWord.extract( word, "r" ) ;
                     }
@@ -237,10 +237,4 @@ public class Email
 
         //System.out.println( _avgSentimentScore ) ;
     }
-
-    public double getAvgSentimentScore()
-    { return _avgSentimentScore ; }
-
-    public boolean markedForDelete()
-    { return _markedForDelete ; }
 }
