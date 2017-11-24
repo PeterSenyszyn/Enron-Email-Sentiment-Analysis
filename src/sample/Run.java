@@ -3,7 +3,6 @@
 
 package sample;
 
-import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.stage.Stage;
@@ -13,15 +12,11 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Run
 {
     private ArrayList<Email> _emails = new ArrayList<>() ;
-
-    private int counter = 0 ;
 
     public Run()
     {
@@ -42,14 +37,12 @@ public class Run
         lineChart.setTitle( "Avg Sentiment Score Of Select Enron Emails Over Time" ) ;
 
         XYChart.Series series = new XYChart.Series() ;
-        series.setName( "Test" ) ;
+        series.setName( "Sentiment Score" ) ;
 
         for ( Email e : _emails )
         {
             series.getData().add( new XYChart.Data( e.getFormattedDate(), e.getAvgSentimentScore() ) ) ;
         }
-
-        //series.getData().add( new XYChart.Data( "1/2/2011", 0.5 ) ) ;
 
         Scene scene = new Scene( lineChart, 1024, 768 ) ;
 
@@ -72,8 +65,6 @@ public class Run
             {
                 if ( !file.getName().equals( ".DS_Store" ) )
                 {
-                    counter++ ;
-                    System.out.println( counter ) ;
                     files.add(file);
                 }
             }
@@ -89,9 +80,6 @@ public class Run
     private void _sortChronologically()
     {
         Collections.sort( _emails ) ;
-
-        for ( Email e : _emails )
-            System.out.println( e.getFormattedDate() ) ;
     }
 
     private void _parseEmails( String path )

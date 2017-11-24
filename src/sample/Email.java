@@ -192,7 +192,6 @@ public class Email implements Comparable<Email>
             try
             {
                 //This is unsafe in normal conditions, but in this situation there is guaranteed to be at least 2 tokens
-                //if st.hasMoreTokens()
                 while ( st.hasMoreTokens() )
                 {
                     String word = st.nextToken() ;
@@ -258,8 +257,6 @@ public class Email implements Comparable<Email>
         }
 
         _avgSentimentScore = summation / _sentimentScores.size() ;
-
-        //System.out.println( _avgSentimentScore ) ;
     }
 
     public Double getAvgSentimentScore()
